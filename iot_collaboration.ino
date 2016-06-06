@@ -1,4 +1,4 @@
-const int sensorPin = A1;
+const int sensorPin = A0;
 const float baselineTemp = 19.0;
 
 void setup () {
