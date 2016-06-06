@@ -21,7 +21,7 @@ void loop (){
   Serial.print(sensorVal);
   
   //Figure out the actual voltage on the analogue port
-  float voltage = (sensorVal/1024.0) * 5.0;
+  float voltage = (sensorVal/1024.0) * 4.1;
   
   //Push these values to the PC
   Serial.print(" Voltage: ");
