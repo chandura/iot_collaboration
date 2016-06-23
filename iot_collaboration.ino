@@ -27,15 +27,18 @@ void setup () {
 }
 
 void loop (){
-
   // Get the volgate measured at the analogue input
   sensorVal = analogRead(A0);
 
   //Figure out the actual voltage on the analogue port
   voltage = (sensorVal/1024.0) * 4.1;
+  //LM35 voltage = (sensorVal/1024.0) * 5000;
     
   //Convert the voltage to temperature in celcius
   temperature = (voltage - 0.5) * 100;
+  //LM35 temperature = voltage/10;
+
+  
 
   //Check to see if a 10 minutes has passed
   if (millis() > (previousMillis + (1000.00 * 60.00 * 10))) {
