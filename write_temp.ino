@@ -4,6 +4,7 @@ void writeTemp (){
   //Written out in JSON format
   Serial.print("{\"Sensor_ID\":7,\"Sensor_Value\":");
   Serial.print(sensorVal);
+  
   Serial.print(",\"Voltage\":\"");
   
   Serial.print(voltage);
@@ -12,4 +13,7 @@ void writeTemp (){
   Serial.print(temperature);
   
   Serial.println("\"}");
+
+  Serial.print(",\"inputVoltage\":\"");
+  Serial.print(inputVoltage);
 }
