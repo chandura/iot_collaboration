@@ -3,7 +3,7 @@ const int sensorPin = A0;
 
 //setup the offset for use when calculating the temperature 
 //set to 0.5 for the TMP36 or 0 for the LM35 sensor
-const int sensorOffset = 0.5; 
+const float sensorOffset = 0.5; 
 
 //Declaration of global variables
 //Declare the variables that will be used to measure the tempreature 
@@ -39,7 +39,8 @@ void loop (){
   inputVoltage = readVcc()/1000;
 
   //Figure out the actual voltage on the analogue port
-  voltage = (sensorVal/1024.0) * inputVoltage;
+  //voltage = (sensorVal/1024.0) * inputVoltage;
+  voltage = (sensorVal/1024.0) * 4.4;
     
   //Convert the voltage to temperature in celcius
   temperature = (voltage - sensorOffset) * 100;

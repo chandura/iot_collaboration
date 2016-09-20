@@ -12,8 +12,8 @@ void writeTemp (){
  
   Serial.print(temperature);
   
-  Serial.println("\"}");
+  //Serial.print(",\"inputVoltage\":\"");
+  //Serial.print(inputVoltage);
 
-  Serial.print(",\"inputVoltage\":\"");
-  Serial.print(inputVoltage);
+  Serial.println("\"}");
 }
