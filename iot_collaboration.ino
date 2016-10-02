@@ -1,5 +1,7 @@
 //Set up the pins to be used and their purpose
-const int sensorPin = A0;
+const int tempsensorPin = A0; //Temp sensor
+const int lightsensorPin = A7; //Light sensor
+
 
 //setup the offset for use when calculating the temperature 
 //set to 0.5 for the TMP36 or 0 for the LM35 sensor
@@ -7,10 +9,13 @@ const float sensorOffset = 0.5;
 
 //Declaration of global variables
 //Declare the variables that will be used to measure the tempreature 
-int sensorVal;
+int tempsensorVal;
 float inputVoltage;
 float voltage;
 float temperature;
+//Declare the variables used to measure the light values
+int lightsensorVal = 0;
+int lightValue = 0;
 
 //Set a base temprature for the measurement
 const float baselineTemp = 19.0;
@@ -33,22 +38,28 @@ void setup () {
 
 void loop (){
   // Get the volgate measured at the analogue input
-  sensorVal = analogRead(A0);
+  tempsensorVal = analogRead(tempsensorPin);
+  // Get the volgate measured from the light sensor
+  lightsensorVal = analogRead(lightsensorPin);
   
   //Set the input voltage to the actual input voltage on the arduino
   inputVoltage = readVcc()/1000;
 
   //Figure out the actual voltage on the analogue port
   //voltage = (sensorVal/1024.0) * inputVoltage;
-  voltage = (sensorVal/1024.0) * 4.4;
+  voltage = (tempsensorVal/1024.0) * 4.4;
     
   //Convert the voltage to temperature in celcius
   temperature = (voltage - sensorOffset) * 100;
+
+  //Now convert the light reading to a useable value
+  lightValue = lightsensorVal/4;
 
   //Check to see if a 10 minutes has passed
   if (millis() > (previousMillis + (1000.00 * 60.00 * 10))) {
        //If 10 mins has passed write of the temp and reset the timer
        writeTemp();
+       writeLight();
        previousMillis = millis();
   }
 }
@@ -70,6 +81,3 @@ long readVcc() {
   // Back-calculate AVcc in mV 
   return result; 
  }
-
-
-
